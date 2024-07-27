@@ -1,15 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Index from "@/page/Index";
+import Layout from "@/components/base/Layout";
 
 function App() {
   return (
-    <div className="flex justify-center">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Index />} />
+      </Routes>
+    </Layout>
   );
 }
 
