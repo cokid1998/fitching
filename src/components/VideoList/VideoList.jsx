@@ -8,6 +8,7 @@ const YOUTUBE_SEARCH_API_URL = "https://www.googleapis.com/youtube/v3/search";
 function VideoList({ selectSmallCategory }) {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(200);
 
   const opts = {
     width: "340px",
@@ -38,11 +39,22 @@ function VideoList({ selectSmallCategory }) {
       } catch (error) {
         console.error("Error fetching videos:", error);
         setLoading(false);
+        if (error.response.status === 403) {
+          setIsError(403);
+        }
       }
     };
 
     fetchVideos();
   }, [selectSmallCategory]);
+
+  if (isError) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        API요청 한도를 초과했습니다.
+      </div>
+    );
+  }
 
   if (loading) {
     return (
