@@ -29,7 +29,7 @@ function Video() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <div className="bg-black rounded-b-3xl pt-[50px] px-[25px]">
         <Link to="/">
           <img
