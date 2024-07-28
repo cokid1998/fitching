@@ -61,11 +61,15 @@ function Video() {
               <SelectValue placeholder="소분류" />
             </SelectTrigger>
             <SelectContent>
-              {smallCategory[curLargeCategory]?.map((item) => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
+              {curLargeCategory === "" ? (
+                <SelectItem value={null}>대분류를 선택해주세요</SelectItem>
+              ) : (
+                smallCategory[curLargeCategory]?.map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {item}
+                  </SelectItem>
+                ))
+              )}
             </SelectContent>
           </Select>
         </div>
