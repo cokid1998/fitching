@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import WhiteLogo from "@/assets/whiteLogo.png";
 import {
@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import VideoList from "@/components/VideoList/VideoList";
+import { useLocation } from "react-router-dom";
 
 const largeCategory = ["머리", "상체", "하체"];
 const smallCategory = {
@@ -17,17 +18,36 @@ const smallCategory = {
   하체: ["발바닥", "발목", "무릎", "허리"],
 };
 
+const switchCategoryToKr = (position) => {
+  switch (position) {
+    case "head":
+      return "머리";
+    case "right":
+    case "left":
+    case "body":
+      return "상체";
+    case "leg":
+      return "하체";
+    default:
+      return "머리";
+  }
+};
+
 function Video() {
-  const [curLargeCategory, setCurLargeCategory] = useState("");
-  const [selectSmallCategory, setSelectSmallCategory] = useState("");
+  const location = useLocation();
+  const path = switchCategoryToKr(location.pathname.slice(7));
+  const [curLargeCategory, setCurLargeCategory] = useState(path);
+  const [selectSmallCategory, setSelectSmallCategory] = useState("소분류");
 
   const handleLargeCategory = (value) => {
     setCurLargeCategory(value);
+    setSelectSmallCategory("소분류");
   };
   const handleSelectSmallCategory = (value) => {
     setSelectSmallCategory(value);
   };
 
+  console.log(selectSmallCategory);
   return (
     <div className="flex flex-col h-full">
       <div className="bg-black rounded-b-3xl pt-[50px] px-[25px]">
@@ -45,7 +65,7 @@ function Video() {
         <div className="flex justify-between pb-[34px]">
           <Select onValueChange={handleLargeCategory}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="대분류" />
+              <SelectValue placeholder={curLargeCategory} />
             </SelectTrigger>
             <SelectContent>
               {largeCategory.map((item) => (
@@ -58,18 +78,16 @@ function Video() {
 
           <Select onValueChange={handleSelectSmallCategory}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="소분류" />
+              <SelectValue placeholder={"소분류"}>
+                {selectSmallCategory}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {curLargeCategory === "" ? (
-                <SelectItem value={null}>대분류를 선택해주세요</SelectItem>
-              ) : (
-                smallCategory[curLargeCategory]?.map((item) => (
-                  <SelectItem key={item} value={item}>
-                    {item}
-                  </SelectItem>
-                ))
-              )}
+              {smallCategory[curLargeCategory]?.map((item) => (
+                <SelectItem key={item} value={item}>
+                  {item}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

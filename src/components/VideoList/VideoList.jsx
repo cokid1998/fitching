@@ -23,6 +23,7 @@ function VideoList({ selectSmallCategory }) {
 
   useEffect(() => {
     const fetchVideos = async () => {
+      if (selectSmallCategory === "소분류") return;
       try {
         const response = await axios.get(YOUTUBE_SEARCH_API_URL, {
           params: {

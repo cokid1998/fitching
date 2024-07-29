@@ -16,8 +16,8 @@ function Index() {
       />
       <Tier />
       <p className="w-[230px] flex flex-col justify-center items-center text-xl font-medium tablet:mb-[30px] mobile:mb-[10px]">
-        <div>스트레칭 할 부위를</div>
-        <div>선택해주세요</div>
+        <span>스트레칭 할 부위를</span>
+        <span>선택해주세요</span>
       </p>
       <div className="relative w-full h-full flex justify-center">
         <Link to="/video/head">
