@@ -19,6 +19,10 @@ module.exports = {
       screens: {},
     },
     extend: {
+      translate: {
+        "left-leg-position": "calc(50% + 99px)",
+        "right-leg-position": "calc(-50% + 5px)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

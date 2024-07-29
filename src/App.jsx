@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/video" element={<Video />} />
+        <Route path="/video/:id" element={<Video />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Layout>
