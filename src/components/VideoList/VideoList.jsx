@@ -3,6 +3,7 @@ import YouTube from "react-youtube";
 import axios from "axios";
 import VideoItem from "@/components/VideoItem/VideoItem";
 import spinner from "@/assets/spinner.svg";
+
 const YOUTUBE_SEARCH_API_URL = "https://www.googleapis.com/youtube/v3/search";
 
 function VideoList({ selectSmallCategory }) {
@@ -23,7 +24,6 @@ function VideoList({ selectSmallCategory }) {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      if (selectSmallCategory === "소분류") return;
       try {
         const response = await axios.get(YOUTUBE_SEARCH_API_URL, {
           params: {
@@ -31,7 +31,7 @@ function VideoList({ selectSmallCategory }) {
             q: `${selectSmallCategory} 스트레칭`,
             type: "video",
             key: import.meta.env.VITE_YOUTUBE_API_KEY,
-            maxResults: 3,
+            maxResults: 5,
           },
         });
 
@@ -49,7 +49,7 @@ function VideoList({ selectSmallCategory }) {
     fetchVideos();
   }, [selectSmallCategory]);
 
-  if (isError) {
+  if (isError === 404) {
     return (
       <div className="w-full h-full flex justify-center items-center">
         API요청 한도를 초과했습니다.
@@ -65,7 +65,7 @@ function VideoList({ selectSmallCategory }) {
     );
   }
   return (
-    <div className="pt-[30px] px-[30px] flex flex-col gap-[30px]">
+    <div className="pt-[30px] px-[30px] flex flex-col gap-[30px] overflow-scroll scrollbar-hide h-100svh-minus-300">
       {videos.map((item) => {
         return <VideoItem key={item.etag} videoData={item} />;
       })}

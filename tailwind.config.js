@@ -23,6 +23,9 @@ module.exports = {
         "left-leg-position": "calc(50% + 99px)",
         "right-leg-position": "calc(-50% + 5px)",
       },
+      spacing: {
+        "100svh-minus-300": "calc(100svh - 305px)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -79,5 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
 };

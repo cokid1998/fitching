@@ -37,17 +37,18 @@ function Video() {
   const location = useLocation();
   const path = switchCategoryToKr(location.pathname.slice(7));
   const [curLargeCategory, setCurLargeCategory] = useState(path);
-  const [selectSmallCategory, setSelectSmallCategory] = useState("소분류");
+  const [selectSmallCategory, setSelectSmallCategory] = useState(
+    smallCategory[curLargeCategory][0]
+  );
 
   const handleLargeCategory = (value) => {
     setCurLargeCategory(value);
-    setSelectSmallCategory("소분류");
+    setSelectSmallCategory(smallCategory[curLargeCategory][0]);
   };
   const handleSelectSmallCategory = (value) => {
     setSelectSmallCategory(value);
   };
 
-  console.log(selectSmallCategory);
   return (
     <div className="flex flex-col h-full">
       <div className="bg-black rounded-b-3xl pt-[50px] px-[25px]">
@@ -78,8 +79,8 @@ function Video() {
 
           <Select onValueChange={handleSelectSmallCategory}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder={"소분류"}>
-                {selectSmallCategory}
+              <SelectValue placeholder={smallCategory[curLargeCategory][0]}>
+                {smallCategory[curLargeCategory][0]}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
