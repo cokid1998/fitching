@@ -3,6 +3,7 @@ import Index from "@/page/Index";
 import Layout from "@/components/base/Layout";
 import NotFound from "@/NotFound";
 import Video from "@/page/Video";
+import VideoDetail from "@/page/VideoDetail";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/video" element={<Video />} />
-        <Route path="/video/:id" element={<Video />} />
+        <Route path="/video/:id" element={<VideoDetail />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Layout>
