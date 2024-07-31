@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import YouTube from "react-youtube";
 import axios from "axios";
 import VideoItem from "@/components/VideoItem/VideoItem";
 import spinner from "@/assets/spinner.svg";
@@ -10,17 +9,6 @@ function VideoList({ selectSmallCategory }) {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(200);
-
-  const opts = {
-    width: "340px",
-    height: "190px",
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-  const onReady = (event) => {
-    event.target.pauseVideo();
-  };
 
   useEffect(() => {
     const fetchVideos = async () => {

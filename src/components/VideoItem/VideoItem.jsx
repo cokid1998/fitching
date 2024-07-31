@@ -23,7 +23,10 @@ function VideoItem({ videoData }) {
   } = videoData;
 
   return (
-    <Link to={`/video/${videoId}`} className="w-full flex flex-col gap-[14px]">
+    <Link
+      to={`/video/detail/${videoId}`}
+      className="w-full flex flex-col gap-[14px]"
+    >
       <YouTubeThumbnail thumbnailData={high} />
       <div className="truncate">제목: {title}</div>
     </Link>
