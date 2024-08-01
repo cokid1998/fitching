@@ -1,5 +1,5 @@
 import YouTube from "react-youtube";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "@/assets/Logo.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -115,9 +115,11 @@ function VideoDetail() {
   }
 
   return (
-    <div className="w-full h-full pt-[30px] pb-[150px] flex flex-col justify-between">
+    <div className="w-full h-full pt-[30px] pb-[150px] flex flex-col items-center justify-between">
       <div className="flex flex-col items-center">
-        <img src={Logo} className="w-[83px] h-[26px] mb-[100px]" />
+        <Link to="/" className="mb-[100px]">
+          <img src={Logo} className="w-[83px] h-[26px]" />
+        </Link>
         <YouTube
           videoId={youtubeId}
           opts={opts}
@@ -131,17 +133,19 @@ function VideoDetail() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-[20px]">
-        <motion.button
+      <button
+        className="w-fit flex flex-col items-center justify-center gap-[20px]"
+        onClick={() => setIsChecked(!isChecked)}
+      >
+        <motion.div
           initial="init"
           animate={isChecked ? "checked" : "init"}
           variants={checkVariants}
           className="w-[85px] h-[52px] rounded-xl flex items-center justify-center border-2 border-[#A8A8A8] "
           whileHover={{ scale: 1.1 }}
-          onClick={() => setIsChecked(!isChecked)}
         >
           <AnimatedCheckIcon isChecked={isChecked} />
-        </motion.button>
+        </motion.div>
 
         <motion.div
           className="text-center text-[#A8A8A8]"
@@ -154,7 +158,7 @@ function VideoDetail() {
           <br />
           경험치를 획득하세요
         </motion.div>
-      </div>
+      </button>
     </div>
   );
 }

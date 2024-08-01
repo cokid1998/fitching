@@ -1,5 +1,6 @@
 export const checkVariants = {
   init: {
+    backgroundColor: "#ffffff",
     transition: {
       duration: 0.2,
       type: "tween",
@@ -7,8 +8,8 @@ export const checkVariants = {
     },
   },
   checked: {
-    backgroundColor: "orange",
-    borderColor: "orange",
+    backgroundColor: "#ff8000",
+    borderColor: "#ff8000",
     transition: {
       duration: 0.2,
       type: "tween",
@@ -27,7 +28,7 @@ export const checkTextVariants = {
     },
   },
   checked: {
-    color: "orange",
+    color: "#ff8000",
     transition: {
       duration: 0.2,
       type: "tween",
