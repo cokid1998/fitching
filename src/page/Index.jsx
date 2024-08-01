@@ -5,6 +5,7 @@ import right from "@/assets/right.png";
 import left from "@/assets/left.png";
 import body from "@/assets/body.png";
 import leg from "@/assets/leg.png";
+import Character from "@/components/character/Character";
 import { Link } from "react-router-dom";
 
 function Index() {
@@ -20,36 +21,7 @@ function Index() {
         <span>선택해주세요</span>
       </p>
       <div className="relative w-full h-full flex justify-center">
-        <Link to="/video/head">
-          <img
-            src={Head}
-            className="w-[110px] h-[110px] absolute top-[-9px] left-1/2 -translate-x-1/2 z-10"
-          />
-        </Link>
-        <Link to="/video/body">
-          <img
-            src={body}
-            className="w-[80px] h-[90px] absolute top-[95px] left-1/2 -translate-x-1/2"
-          />
-        </Link>
-        <Link to="/video/left">
-          <img
-            src={left}
-            className="absolute w-[120px] h-[150px] top-[112.5px] left-1/2 -translate-x-left-leg-position"
-          />
-        </Link>
-        <Link to="/video/right">
-          <img
-            src={right}
-            className="absolute w-[90px] h-[135px] top-[119px] left-1/2 -translate-x-right-leg-position"
-          />
-        </Link>
-        <Link to="/video/leg">
-          <img
-            src={leg}
-            className="w-[80px] h-[230px] absolute top-[185px] left-1/2 -translate-x-1/2"
-          />
-        </Link>
+        <Character />
       </div>
     </div>
   );

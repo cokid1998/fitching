@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Tier from "@/components/Tier/Tier";
 import caracter from "@/assets/caracter.png";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import Character from "@/components/character/Character";
 
 function TabBar() {
   const location = useLocation();
@@ -15,7 +15,9 @@ function TabBar() {
       <Sheet>
         <SheetContent className="w-[300px] sm:w-[540px] flex flex-col items-center justify-center">
           <Tier />
-          <img src={caracter} className="w-[258px] h-[444px]" />
+          <div className="relative w-full h-full">
+            <Character isLink={false} />
+          </div>
         </SheetContent>
         <div className="max-w-[430px] absolute bottom-[30px] flex w-full justify-around">
           <Link to={"/"}>

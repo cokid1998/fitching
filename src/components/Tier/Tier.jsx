@@ -1,6 +1,11 @@
 import { Progress } from "@/components/ui/progress";
-import TierImage from "@/assets/platinum.png";
 import { LockKeyhole } from "lucide-react";
+import TierImage from "@/assets/platinum.png";
+import Head from "@/assets/head.png";
+import right from "@/assets/right.png";
+import left from "@/assets/left.png";
+import body from "@/assets/body.png";
+import leg from "@/assets/leg.png";
 
 function Tier() {
   const isLogged = false;
