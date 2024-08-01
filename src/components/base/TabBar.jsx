@@ -1,10 +1,15 @@
 import { Home, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Tier from "@/components/Tier/Tier";
 import caracter from "@/assets/caracter.png";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 function TabBar() {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <>
       <Sheet>
@@ -15,9 +20,17 @@ function TabBar() {
         <div className="max-w-[430px] absolute bottom-[30px] flex w-full justify-around">
           <Link to={"/"}>
             <div className="bg-black w-[120px] h-[50px] rounded-full pl-[10px] flex gap-[10px] items-center">
-              <div className="bg-white w-[34px] h-[34px] rounded-full flex justify-center items-center">
+              <motion.div
+                initial={{
+                  backgroundColor: "#ffffff",
+                }}
+                animate={{
+                  backgroundColor: path === "/" ? "#ff8000" : "#ffffff",
+                }}
+                className="w-[34px] h-[34px] rounded-full flex justify-center items-center"
+              >
                 <Home />
-              </div>
+              </motion.div>
               <div className="text-white">Home</div>
             </div>
           </Link>
