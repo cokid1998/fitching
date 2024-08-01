@@ -120,17 +120,8 @@ function VideoDetail() {
         <Link to="/" className="mb-[100px]">
           <img src={Logo} className="w-[83px] h-[26px]" />
         </Link>
-        <YouTube
-          videoId={youtubeId}
-          opts={opts}
-          onReady={onReady}
-          className="mb-[10px]"
-        />
-
-        <div className="truncate max-w-xs">
-          제목: 탈모 예방을 위해 『두피의 혈자리』 눌러라! #광고포함 | [내 몸
-          사용설명서] 321회| TV CHOSUN 20200925 방송
-        </div>
+        <div className="truncate max-w-xs mb-[10px]">제목: {title}</div>
+        <YouTube videoId={youtubeId} opts={opts} onReady={onReady} />
       </div>
 
       <button
