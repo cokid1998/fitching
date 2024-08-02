@@ -37,7 +37,7 @@ function VideoList({ selectSmallCategory }) {
     fetchVideos();
   }, [selectSmallCategory]);
 
-  if (isError === 404) {
+  if (isError === 403) {
     return (
       <div className="w-full h-full flex justify-center items-center">
         API요청 한도를 초과했습니다.
