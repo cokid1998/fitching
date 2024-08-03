@@ -24,7 +24,7 @@ module.exports = {
         "right-leg-position": "calc(-50% + 5px)",
       },
       spacing: {
-        "100svh-minus-300": "calc(100svh - 305px)",
+        "100svh-minus-300": "calc(100svh - 335px)",
       },
       colors: {
         border: "hsl(var(--border))",

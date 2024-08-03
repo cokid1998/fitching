@@ -53,11 +53,11 @@ function VideoList({ selectSmallCategory }) {
     );
   }
   return (
-    <div className="pt-[30px] px-[30px] flex flex-col gap-[30px] overflow-scroll scrollbar-hide h-100svh-minus-300">
+    <>
       {videos.map((item) => {
         return <VideoItem key={item.etag} videoData={item} />;
       })}
-    </div>
+    </>
   );
 }
 

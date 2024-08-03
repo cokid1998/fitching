@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import WhiteLogo from "@/assets/whiteLogo.png";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import VideoList from "@/components/VideoList/VideoList";
 import { useLocation } from "react-router-dom";
+import useGetScrollYRef from "@/hook/useGetScrollYRef";
 
 const largeCategory = ["머리", "상체", "하체"];
 const smallCategory = {
@@ -33,6 +34,14 @@ const switchCategoryToKr = (position) => {
   }
 };
 
+const positionTop = (scrollY) => {
+  if (scrollY > 200) {
+    return 200;
+  }
+
+  return scrollY;
+};
+
 function Video() {
   const location = useLocation();
   const path = switchCategoryToKr(location.pathname.slice(7));
@@ -40,7 +49,6 @@ function Video() {
   const [selectSmallCategory, setSelectSmallCategory] = useState(
     smallCategory[curLargeCategory][0]
   );
-
   const handleLargeCategory = (value) => {
     setCurLargeCategory(value);
     setSelectSmallCategory(smallCategory[curLargeCategory][0]);
@@ -49,9 +57,18 @@ function Video() {
     setSelectSmallCategory(value);
   };
 
+  const [scrollY, scrollRef] = useGetScrollYRef();
+
   return (
-    <div className="flex flex-col h-full">
-      <div className="bg-black rounded-b-3xl pt-[50px] px-[25px]">
+    <div className="flex flex-col">
+      <div
+        className={`bg-black rounded-b-3xl pt-[50px] px-[25px] mb-[30px]`}
+        style={
+          scrollY
+            ? { position: "relative", top: `${-positionTop(scrollY)}px` }
+            : {}
+        }
+      >
         <Link to="/">
           <img
             src={WhiteLogo}
@@ -94,9 +111,64 @@ function Video() {
         </div>
       </div>
 
-      <VideoList selectSmallCategory={selectSmallCategory} />
+      <div
+        ref={scrollRef}
+        className={`px-[30px] flex flex-col gap-[30px] overflow-scroll border border-cyan-500 scrollbar-hide
+          ${scrollY === 0 ? "h-100svh-minus-300" : ""}
+          `}
+        style={
+          scrollY !== 0
+            ? {
+                position: "relative",
+                top: `${-positionTop(scrollY)}px`,
+                maxHeight: `calc(100svh - (335px - ${scrollY}px))`,
+              }
+            : {}
+        }
+      >
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        <div className="min-h-[100px] max-w-[390px] truncate">
+          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </div>
+        {/* <VideoList
+          scrollRef={scrollRef}
+          selectSmallCategory={selectSmallCategory}
+        /> */}
+      </div>
     </div>
   );
 }
-
+// 전체 높이 - 헤더 높이
 export default Video;
