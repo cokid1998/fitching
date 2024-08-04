@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { SignUpAPI } from "@/api/sign-up";
 import { AuthContext } from "@/context/AuthContext";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "@/assets/BigLogo.png";
 import { useCookies } from "react-cookie";
 
 function Signup() {
@@ -39,7 +40,10 @@ function Signup() {
 
   return (
     <div className="flex justify-center flex-col items-center h-full px-[30px]">
-      <div className="text-5xl font-bold mb-[50px]">회원가입</div>
+      <Link to="/">
+        <img src={Logo} className="w-[260px] h-[82px] mb-[35px]" />
+      </Link>
+      <div className="text-3xl font-bold mb-[50px]">회원가입</div>
 
       <div className="w-full flex flex-col gap-[20px] mb-[50px]">
         <div className="flex flex-col gap-[5px]">

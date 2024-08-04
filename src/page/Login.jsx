@@ -40,22 +40,27 @@ function Login() {
   return (
     <div className="flex justify-center flex-col items-center h-full px-[30px]">
       <Link to="/">
-        <img src={Logo} className="w-[260px] h-[82px] mb-[75px]" />
+        <img src={Logo} className="w-[260px] h-[82px] mb-[35px]" />
       </Link>
+      <div className="text-3xl font-bold mb-[50px]">로그인</div>
 
       <div className="w-full flex flex-col gap-[10px] mb-[50px]">
-        <Input
-          onChange={handleEmail}
-          type="email"
-          placeholder="이메일을 입력해주세요"
-          defaultValue={email}
-        />
-        <Input
-          onChange={handlePassword}
-          type="password"
-          placeholder="비밀번호를 입력해주세요"
-          defaultValue={password}
-        />
+        <div className="flex flex-col gap-[5px]">
+          <label>이메일</label>
+          <Input
+            onChange={handleEmail}
+            type="email"
+            placeholder="이메일을 입력해주세요"
+          />
+        </div>
+        <div className="flex flex-col gap-[5px]">
+          <label>비밀번호</label>
+          <Input
+            onChange={handlePassword}
+            type="password"
+            placeholder="비밀번호를 입력해주세요"
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-[10px] w-full mb-[50px]">
