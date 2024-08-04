@@ -60,7 +60,7 @@ function Video() {
   const [scrollY, scrollRef] = useGetScrollYRef();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-h-svh">
       <div
         className={`bg-black rounded-b-3xl pt-[50px] px-[25px] mb-[30px]`}
         style={
@@ -126,10 +126,10 @@ function Video() {
             : {}
         }
       >
-        {/* <VideoList
+        <VideoList
           scrollRef={scrollRef}
           selectSmallCategory={selectSmallCategory}
-        /> */}
+        />
       </div>
     </div>
   );
