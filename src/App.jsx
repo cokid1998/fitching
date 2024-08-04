@@ -5,6 +5,7 @@ import NotFound from "@/NotFound";
 import Video from "@/page/Video";
 import VideoDetail from "@/page/VideoDetail";
 import Login from "@/page/Login";
+import Signup from "@/page/Signup";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/video/:id" element={<Video />} />
         <Route path="/video/detail/:id" element={<VideoDetail />} />
         <Route path="/*" element={<NotFound />} />

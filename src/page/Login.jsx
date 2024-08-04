@@ -7,14 +7,12 @@ import GoogleLogin from "@/assets/GoogleLogin.svg";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "@/api/login";
-import { SignUpAPI } from "@/api/sign-up";
 import { useCookies } from "react-cookie";
 
 function Login() {
   const [email, setEmail] = useState("admin@naver.com");
   const [password, setPassword] = useState("1234");
-  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
-  const { setLocalStorageLogged, isLogged } = useContext(AuthContext);
+  const { setLocalStorageLogged } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -28,13 +26,12 @@ function Login() {
   const submitLogin = async (data) => {
     const res = await loginAPI(data);
     const { status } = res;
+
     if (status === 200) {
-      navigate("/");
-      setCookie(
-        "accessToken",
+      setLocalStorageLogged(
         res.headers["authorization"].replace("Bearer ", "")
       );
-      setLocalStorageLogged();
+      navigate("/");
     } else {
       alert("Error");
     }
@@ -50,7 +47,7 @@ function Login() {
         <Input
           onChange={handleEmail}
           type="email"
-          placeholder="아이디 또는 이메일을 입력해주세요"
+          placeholder="이메일을 입력해주세요"
           defaultValue={email}
         />
         <Input
@@ -63,9 +60,11 @@ function Login() {
 
       <div className="flex flex-col gap-[10px] w-full mb-[50px]">
         <Button onClick={() => submitLogin({ email, password })}>로그인</Button>
-        <Button onClick={() => SignUpAPI()} variant="outline">
-          회원가입
-        </Button>
+        <Link to="/signup">
+          <Button variant="outline" className="w-full">
+            회원가입
+          </Button>
+        </Link>
       </div>
 
       <div className="flex flex-col items-center">

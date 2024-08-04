@@ -1,17 +1,12 @@
 import axios from "axios";
 
-const URL = "http://localhost:8080/user/sign-up";
+const URL = import.meta.env.VITE_API_URL + "/user/sign-up";
 
-export const SignUpAPI = async () => {
+export const SignUpAPI = async (data) => {
   try {
-    const res = await axios.post(`${URL}`, {
-      email: "admin@naver.com",
-      password: "1234",
-      name: "test",
-    });
-
-    console.log(res);
+    const res = await axios.post(`${URL}`, data);
+    return res;
   } catch (e) {
-    console.log(e);
+    alert(e);
   }
 };
