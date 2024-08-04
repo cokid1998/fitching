@@ -96,9 +96,7 @@ function Video() {
 
           <Select onValueChange={handleSelectSmallCategory}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder={smallCategory[curLargeCategory][0]}>
-                {smallCategory[curLargeCategory][0]}
-              </SelectValue>
+              <SelectValue placeholder={smallCategory[curLargeCategory][0]} />
             </SelectTrigger>
             <SelectContent>
               {smallCategory[curLargeCategory]?.map((item) => (
