@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { AuthContext } from "@/context/AuthContext";
 import { Home, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -7,11 +5,13 @@ import Tier from "@/components/Tier/Tier";
 import { motion } from "framer-motion";
 import Character from "@/components/character/Character";
 import { LogIn } from "lucide-react";
+import { AuthContext } from "@/context/AuthContext";
+import { useContext } from "react";
 
 function TabBar() {
+  const { isLogged } = useContext(AuthContext);
   const location = useLocation();
   const path = location.pathname;
-  const { isLogged } = useContext(AuthContext);
 
   return (
     <>

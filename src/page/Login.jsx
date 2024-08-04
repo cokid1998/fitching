@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 import Logo from "@/assets/BigLogo.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,17 +8,16 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "@/api/login";
 import { SignUpAPI } from "@/api/sign-up";
-import { useContext } from "react";
-import { AuthContext } from "@/context/AuthContext";
 import { useCookies } from "react-cookie";
 
 function Login() {
   const [email, setEmail] = useState("admin@naver.com");
   const [password, setPassword] = useState("1234");
   const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+  const { setLocalStorageLogged, isLogged } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const { setIsLogged } = useContext(AuthContext);
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -28,12 +29,12 @@ function Login() {
     const res = await loginAPI(data);
     const { status } = res;
     if (status === 200) {
-      setIsLogged(true);
       navigate("/");
       setCookie(
         "accessToken",
         res.headers["authorization"].replace("Bearer ", "")
       );
+      setLocalStorageLogged();
     } else {
       alert("Error");
     }
