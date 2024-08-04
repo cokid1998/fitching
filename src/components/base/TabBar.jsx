@@ -1,14 +1,17 @@
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 import { Home, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Tier from "@/components/Tier/Tier";
-import caracter from "@/assets/caracter.png";
 import { motion } from "framer-motion";
 import Character from "@/components/character/Character";
+import { LogIn } from "lucide-react";
 
 function TabBar() {
   const location = useLocation();
   const path = location.pathname;
+  const { isLogged } = useContext(AuthContext);
 
   return (
     <>
@@ -36,13 +39,32 @@ function TabBar() {
               <div className="text-white">Home</div>
             </div>
           </Link>
-
-          <SheetTrigger className="bg-black w-[120px] h-[50px] pl-[10px] gap-[5px] rounded-full flex items-center">
-            <div className="bg-white w-[34px] h-[34px] rounded-full flex justify-center items-center">
-              <User />
-            </div>
-            <div className="text-white">My Page</div>
-          </SheetTrigger>
+          {isLogged ? (
+            <SheetTrigger className="bg-black w-[120px] h-[50px] pl-[10px] gap-[5px] rounded-full flex items-center">
+              <div className="bg-white w-[34px] h-[34px] rounded-full flex justify-center items-center">
+                <User />
+              </div>
+              <div className="text-white">My Page</div>
+            </SheetTrigger>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-black w-[120px] h-[50px] pl-[10px] gap-[10px] rounded-full flex items-center"
+            >
+              <motion.div
+                initial={{
+                  backgroundColor: "#ffffff",
+                }}
+                animate={{
+                  backgroundColor: path === "/login" ? "#ff8000" : "#ffffff",
+                }}
+                className="bg-white w-[34px] h-[34px] rounded-full flex justify-center items-center"
+              >
+                <LogIn />
+              </motion.div>
+              <div className="text-white">Login</div>
+            </Link>
+          )}
         </div>
       </Sheet>
     </>

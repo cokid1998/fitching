@@ -6,6 +6,7 @@ import right from "@/assets/right.png";
 import left from "@/assets/left.png";
 import body from "@/assets/body.png";
 import leg from "@/assets/leg.png";
+import { Link } from "react-router-dom";
 
 function Tier() {
   const isLogged = false;
@@ -21,10 +22,13 @@ function Tier() {
         </>
       ) : (
         <>
-          <div className="w-[200px] h-[60px] border-[#B8B8B8] border-2 flex justify-around items-center rounded-2xl">
+          <Link
+            to="/login"
+            className="w-[200px] h-[60px] border-[#B8B8B8] border-2 flex justify-around items-center rounded-2xl"
+          >
             <div className="text-[#B8B8B8]">로그인 후 점수 잠금 해제</div>
             <LockKeyhole color="#B8B8B8" />
-          </div>
+          </Link>
         </>
       )}
     </div>

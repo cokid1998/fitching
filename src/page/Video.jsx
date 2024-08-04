@@ -126,42 +126,6 @@ function Video() {
             : {}
         }
       >
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
-        <div className="min-h-[100px] max-w-[390px] truncate">
-          asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </div>
         {/* <VideoList
           scrollRef={scrollRef}
           selectSmallCategory={selectSmallCategory}
@@ -170,5 +134,5 @@ function Video() {
     </div>
   );
 }
-// 전체 높이 - 헤더 높이
+
 export default Video;
