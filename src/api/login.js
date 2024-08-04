@@ -1,14 +1,13 @@
 import axios from "axios";
 
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8080/login";
 
 export const loginAPI = async (data) => {
   try {
-    const res = await axios.post(`${URL}/login`, data);
+    const res = await axios.post(`${URL}`, data);
 
-    alert(res);
+    return res;
   } catch (e) {
-    console.log(e);
     alert(e);
   }
 };

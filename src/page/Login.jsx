@@ -3,18 +3,40 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import GoogleLogin from "@/assets/GoogleLogin.svg";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "@/api/login";
+import { SignUpAPI } from "@/api/sign-up";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const [email, setEmail] = useState("admin@naver.com");
   const [password, setPassword] = useState("1234");
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
 
+  const navigate = useNavigate();
+  const { setIsLogged } = useContext(AuthContext);
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
   const handlePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const submitLogin = async (data) => {
+    const res = await loginAPI(data);
+    const { status } = res;
+    if (status === 200) {
+      setIsLogged(true);
+      navigate("/");
+      setCookie(
+        "accessToken",
+        res.headers["authorization"].replace("Bearer ", "")
+      );
+    } else {
+      alert("Error");
+    }
   };
 
   return (
@@ -39,8 +61,10 @@ function Login() {
       </div>
 
       <div className="flex flex-col gap-[10px] w-full mb-[50px]">
-        <Button onClick={() => loginAPI({ email, password })}>로그인</Button>
-        <Button variant="outline">회원가입</Button>
+        <Button onClick={() => submitLogin({ email, password })}>로그인</Button>
+        <Button onClick={() => SignUpAPI()} variant="outline">
+          회원가입
+        </Button>
       </div>
 
       <div className="flex flex-col items-center">
