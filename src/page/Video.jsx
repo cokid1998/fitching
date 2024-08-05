@@ -24,8 +24,7 @@ const switchCategoryToKr = (position) => {
   switch (position) {
     case "head":
       return "머리";
-    case "right":
-    case "left":
+    case "arm":
     case "body":
       return "상체";
     case "leg":
@@ -74,12 +73,12 @@ function Video() {
             : {}
         }
       >
-        <Link to="/">
-          <img
-            src={WhiteLogo}
-            className="w-[130px] m-auto h-[40px] mb-[20px]"
-          />
-        </Link>
+        <div className="flex justify-center">
+          <Link to="/">
+            <img src={WhiteLogo} className="w-[130px] h-[40px] mb-[20px]" />
+          </Link>
+        </div>
+
         <p className="text-white mb-[46px]">
           <span className="text-[20px]">
             {curLargeCategory} 스트레칭이 하고싶은

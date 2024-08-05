@@ -62,7 +62,7 @@ function AnimatedCheckIcon({ initial = true, isChecked }) {
 }
 
 function VideoDetail() {
-  const { user } = useContext(AuthContext);
+  const { user, isLogged } = useContext(AuthContext);
   const [cookie] = useCookies(["accessToken"]);
   const location = useLocation();
   const { part: partName } = location.state;
@@ -108,10 +108,7 @@ function VideoDetail() {
   const submitChecked = () => {
     if (isChecked) return;
     setIsChecked(true);
-    checkVideo(
-      { userId: user.userId, partName: user.name },
-      cookie.accessToken
-    );
+    checkVideo({ userId: user.userId, partName }, cookie.accessToken);
   };
 
   if (isError === 404) {
@@ -136,32 +133,50 @@ function VideoDetail() {
         <YouTube videoId={youtubeId} opts={opts} onReady={onReady} />
       </div>
 
-      <button
-        className="w-fit flex flex-col items-center justify-center gap-[20px]"
-        onClick={submitChecked}
-      >
-        <motion.div
-          initial="init"
-          animate={isChecked ? "checked" : "init"}
-          variants={checkVariants}
-          className="w-[85px] h-[52px] rounded-xl flex items-center justify-center border-2 border-[#A8A8A8] "
-          whileHover={{ scale: 1.1 }}
+      {isLogged ? (
+        <button
+          className="w-fit flex flex-col items-center justify-center gap-[20px]"
+          onClick={submitChecked}
         >
-          <AnimatedCheckIcon isChecked={isChecked} />
-        </motion.div>
+          <motion.div
+            initial="init"
+            animate={isChecked ? "checked" : "init"}
+            variants={checkVariants}
+            className="w-[85px] h-[52px] rounded-xl flex items-center justify-center border-2 border-[#A8A8A8] "
+            whileHover={{ scale: 1.1 }}
+          >
+            <AnimatedCheckIcon isChecked={isChecked} />
+          </motion.div>
 
-        <motion.div
-          className="text-center text-[#A8A8A8]"
-          initial="init"
-          animate={isChecked ? "checked" : "init"}
-          variants={checkTextVariants}
-        >
-          영상을 시청후
-          <br /> 버튼을 클릭해
-          <br />
-          경험치를 획득하세요
-        </motion.div>
-      </button>
+          <motion.div
+            className="text-center text-[#A8A8A8]"
+            initial="init"
+            animate={isChecked ? "checked" : "init"}
+            variants={checkTextVariants}
+          >
+            영상을 시청후
+            <br /> 버튼을 클릭해
+            <br />
+            경험치를 획득하세요
+          </motion.div>
+        </button>
+      ) : (
+        <button className="w-fit flex flex-col items-center justify-center gap-[20px] cursor-default">
+          <motion.div className="w-[85px] h-[52px] rounded-xl flex items-center justify-center border-2 border-[#A8A8A8] ">
+            <AnimatedCheckIcon isChecked={isChecked} />
+          </motion.div>
+
+          <motion.div
+            className="text-center text-[#A8A8A8]"
+            initial="init"
+            animate={isChecked ? "checked" : "init"}
+            variants={checkTextVariants}
+          >
+            로그인을 해보고
+            <br /> 버튼을 클릭해 보세요!
+          </motion.div>
+        </button>
+      )}
     </div>
   );
 }
