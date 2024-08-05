@@ -11,7 +11,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const { setLocalStorageLogged } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -25,13 +25,11 @@ function Signup() {
 
   const submitSignUp = async (data) => {
     const res = await SignUpAPI(data);
-    const { status } = res;
+    const { status, data: userData } = res;
 
     if (status === 200) {
       navigate("/");
-      setLocalStorageLogged(
-        res.headers["authorization"].replace("Bearer ", "")
-      );
+      login(res.headers["authorization"].replace("Bearer ", ""), userData);
     } else {
       alert("Error");
     }

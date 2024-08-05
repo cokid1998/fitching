@@ -10,9 +10,6 @@ import { useContext } from "react";
 import { AuthContext, AuthProvider } from "@/context/AuthContext";
 
 function App() {
-  const test = useContext(AuthContext);
-  console.log(test);
-
   return (
     <Layout>
       <Routes>
