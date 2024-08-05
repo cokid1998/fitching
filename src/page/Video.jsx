@@ -46,8 +46,11 @@ const positionTop = (scrollY) => {
 function Video() {
   const { isLogged, user } = useContext(AuthContext);
   const location = useLocation();
-  const path = switchCategoryToKr(location.pathname.slice(7));
-  const [curLargeCategory, setCurLargeCategory] = useState(path);
+  const part = location.state;
+
+  const [curLargeCategory, setCurLargeCategory] = useState(
+    switchCategoryToKr(part)
+  );
   const [selectSmallCategory, setSelectSmallCategory] = useState(
     smallCategory[curLargeCategory][0]
   );
@@ -133,6 +136,7 @@ function Video() {
         }
       >
         <VideoList
+          curLargeCategory={part}
           scrollRef={scrollRef}
           selectSmallCategory={selectSmallCategory}
         />

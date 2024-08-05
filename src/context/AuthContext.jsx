@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
   const [authState, setAuthState] = useState({
     isLogged: false,
-    user: null, // user: { id: null, name: '' } 형태
+    user: null,
   });
 
   useEffect(() => {

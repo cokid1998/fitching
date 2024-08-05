@@ -13,7 +13,7 @@ const YouTubeThumbnail = ({ thumbnailData }) => {
   );
 };
 
-function VideoItem({ videoData }) {
+function VideoItem({ videoData, curLargeCategory }) {
   const {
     id: { videoId },
     snippet: {
@@ -25,6 +25,7 @@ function VideoItem({ videoData }) {
   return (
     <Link
       to={`/video/detail/${videoId}`}
+      state={{ part: curLargeCategory }}
       className="w-full flex flex-col gap-[14px]"
     >
       <YouTubeThumbnail thumbnailData={high} />

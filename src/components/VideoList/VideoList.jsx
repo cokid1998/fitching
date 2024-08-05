@@ -5,7 +5,7 @@ import spinner from "@/assets/spinner.svg";
 
 const YOUTUBE_SEARCH_API_URL = "https://www.googleapis.com/youtube/v3/search";
 
-function VideoList({ selectSmallCategory }) {
+function VideoList({ selectSmallCategory, curLargeCategory }) {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(200);
@@ -55,7 +55,13 @@ function VideoList({ selectSmallCategory }) {
   return (
     <>
       {videos.map((item) => {
-        return <VideoItem key={item.etag} videoData={item} />;
+        return (
+          <VideoItem
+            key={item.etag}
+            videoData={item}
+            curLargeCategory={curLargeCategory}
+          />
+        );
       })}
     </>
   );

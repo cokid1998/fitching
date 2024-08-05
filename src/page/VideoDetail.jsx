@@ -1,12 +1,13 @@
 import YouTube from "react-youtube";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "@/assets/Logo.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { checkVariants, checkTextVariants } from "@/motion/variants";
 import { checkVideo } from "@/api/checkVideo";
 import { useCookies } from "react-cookie";
+import { AuthContext } from "@/context/AuthContext";
 
 function AnimatedCheckIcon({ initial = true, isChecked }) {
   return (
@@ -61,8 +62,10 @@ function AnimatedCheckIcon({ initial = true, isChecked }) {
 }
 
 function VideoDetail() {
+  const { user } = useContext(AuthContext);
   const [cookie] = useCookies(["accessToken"]);
   const location = useLocation();
+  const { part: partName } = location.state;
   const youtubeId = location.pathname.slice(14);
   const [isChecked, setIsChecked] = useState(false);
   const [title, setTitle] = useState("");
@@ -105,6 +108,10 @@ function VideoDetail() {
   const submitChecked = () => {
     if (isChecked) return;
     setIsChecked(true);
+    checkVideo(
+      { userId: user.userId, partName: user.name },
+      cookie.accessToken
+    );
   };
 
   if (isError === 404) {
