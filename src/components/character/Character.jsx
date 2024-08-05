@@ -4,10 +4,25 @@ import left from "@/assets/left.png";
 import body from "@/assets/body.png";
 import leg from "@/assets/leg.png";
 import { Link } from "react-router-dom";
+import { getParts } from "@/api/getParts";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { useCookies } from "react-cookie";
 
 function Character({ isLink = true }) {
+  const [cookie] = useCookies(["accessToken"]);
+  const { user } = useContext(AuthContext);
+
   const ImageWrapper = ({ to, children }) =>
     isLink ? <Link to={to}>{children}</Link> : <>{children}</>;
+
+  const test = async () => {
+    const res = await getParts(user.userId, cookie.accessToken);
+
+    return res;
+  };
+
+  test();
 
   return (
     <>
