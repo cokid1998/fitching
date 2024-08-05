@@ -1,12 +1,6 @@
 import Logo from "@/assets/Logo.png";
 import Tier from "@/components/Tier/Tier";
-import Head from "@/assets/head.png";
-import right from "@/assets/right.png";
-import left from "@/assets/left.png";
-import body from "@/assets/body.png";
-import leg from "@/assets/leg.png";
 import Character from "@/components/character/Character";
-import { Link } from "react-router-dom";
 
 function Index() {
   return (

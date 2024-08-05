@@ -3,9 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import Logo from "@/assets/Logo.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import spinner from "@/assets/spinner.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { checkVariants, checkTextVariants } from "@/motion/variants";
+import { checkVideo } from "@/api/checkVideo";
+import { useCookies } from "react-cookie";
 
 function AnimatedCheckIcon({ initial = true, isChecked }) {
   return (
@@ -59,9 +60,8 @@ function AnimatedCheckIcon({ initial = true, isChecked }) {
   );
 }
 
-const YOUTUBE_SEARCH_API_URL = "https://www.googleapis.com/youtube/v3/search";
-
 function VideoDetail() {
+  const [cookie] = useCookies(["accessToken"]);
   const location = useLocation();
   const youtubeId = location.pathname.slice(14);
   const [isChecked, setIsChecked] = useState(false);
@@ -89,7 +89,7 @@ function VideoDetail() {
     };
 
     fetchVideos();
-  }, []);
+  }, [youtubeId]);
 
   const opts = {
     width: "360px",
@@ -100,6 +100,11 @@ function VideoDetail() {
   };
   const onReady = (event) => {
     event.target.pauseVideo();
+  };
+
+  const submitChecked = () => {
+    if (isChecked) return;
+    setIsChecked(true);
   };
 
   if (isError === 404) {
@@ -126,7 +131,7 @@ function VideoDetail() {
 
       <button
         className="w-fit flex flex-col items-center justify-center gap-[20px]"
-        onClick={() => setIsChecked(!isChecked)}
+        onClick={submitChecked}
       >
         <motion.div
           initial="init"

@@ -44,7 +44,7 @@ const positionTop = (scrollY) => {
 };
 
 function Video() {
-  const { user } = useContext(AuthContext);
+  const { isLogged, user } = useContext(AuthContext);
   const location = useLocation();
   const path = switchCategoryToKr(location.pathname.slice(7));
   const [curLargeCategory, setCurLargeCategory] = useState(path);
@@ -82,7 +82,9 @@ function Video() {
             {curLargeCategory} 스트레칭이 하고싶은
           </span>
           <br />
-          <span className="text-[20px]">{user.name}님을 위한</span>
+          <span className="text-[20px]">
+            {isLogged ? user.name : "홍길동"}님을 위한
+          </span>
           <br />
           <span className="text-[30px] font-semibold">추천 스트레칭</span>
         </p>

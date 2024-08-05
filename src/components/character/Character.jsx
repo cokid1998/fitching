@@ -16,13 +16,12 @@ function Character({ isLink = true }) {
   const ImageWrapper = ({ to, children }) =>
     isLink ? <Link to={to}>{children}</Link> : <>{children}</>;
 
-  const test = async () => {
+  const getPartsData = async () => {
     const res = await getParts(user.userId, cookie.accessToken);
+    console.log(res);
 
     return res;
   };
-
-  test();
 
   return (
     <>
