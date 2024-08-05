@@ -1,34 +1,44 @@
-// AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+  const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+  const [authState, setAuthState] = useState({
+    isLogged: false,
+    user: null, // user: { id: null, name: '' } 형태
+  });
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 로컬 스토리지에서 로그인 상태 가져오기
-    const savedAuthState = localStorage.getItem("isLogged");
+    const savedAuthState = localStorage.getItem("authState");
     if (savedAuthState) {
-      setIsLogged(JSON.parse(savedAuthState));
+      setAuthState(JSON.parse(savedAuthState));
     }
   }, []);
 
-  const setLocalStorageLogged = (token) => {
-    setIsLogged(true);
-    localStorage.setItem("isLogged", true);
+  const login = (token, userData) => {
+    const newAuthState = {
+      isLogged: true,
+      user: userData,
+    };
+    setAuthState(newAuthState);
+    localStorage.setItem("authState", JSON.stringify(newAuthState));
     setCookie("accessToken", token);
   };
 
   const logout = () => {
-    setIsLogged(false);
-    localStorage.removeItem("isLogged");
+    const newAuthState = {
+      isLogged: false,
+      user: null,
+    };
+    setAuthState(newAuthState);
+    localStorage.removeItem("authState");
+    setCookie("accessToken");
   };
 
   return (
-    <AuthContext.Provider value={{ isLogged, setLocalStorageLogged, logout }}>
+    <AuthContext.Provider value={{ ...authState, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

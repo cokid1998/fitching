@@ -9,12 +9,13 @@ import { AuthContext } from "@/context/AuthContext";
 import { useContext } from "react";
 
 function TabBar() {
-  const { isLogged } = useContext(AuthContext);
+  const { isLogged, logout } = useContext(AuthContext);
   const location = useLocation();
   const path = location.pathname;
 
   return (
     <>
+      <button onClick={logout}>logOut</button>
       <Sheet>
         <SheetContent className="w-[300px] sm:w-[540px] flex flex-col items-center justify-center">
           <Tier />

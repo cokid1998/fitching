@@ -5,7 +5,6 @@ import { AuthContext } from "@/context/AuthContext";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/assets/BigLogo.png";
-import { useCookies } from "react-cookie";
 
 function Signup() {
   const navigate = useNavigate();
@@ -29,10 +28,10 @@ function Signup() {
     const { status } = res;
 
     if (status === 200) {
+      navigate("/");
       setLocalStorageLogged(
         res.headers["authorization"].replace("Bearer ", "")
       );
-      navigate("/");
     } else {
       alert("Error");
     }

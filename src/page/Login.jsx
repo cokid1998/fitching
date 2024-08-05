@@ -7,12 +7,11 @@ import GoogleLogin from "@/assets/GoogleLogin.svg";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "@/api/login";
-import { useCookies } from "react-cookie";
 
 function Login() {
   const [email, setEmail] = useState("admin@naver.com");
   const [password, setPassword] = useState("1234");
-  const { setLocalStorageLogged } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -25,12 +24,10 @@ function Login() {
 
   const submitLogin = async (data) => {
     const res = await loginAPI(data);
-    const { status } = res;
+    const { status, data: userData } = res;
 
     if (status === 200) {
-      setLocalStorageLogged(
-        res.headers["authorization"].replace("Bearer ", "")
-      );
+      login(res.headers["authorization"].replace("Bearer ", ""), userData);
       navigate("/");
     } else {
       alert("Error");
@@ -51,6 +48,7 @@ function Login() {
             onChange={handleEmail}
             type="email"
             placeholder="이메일을 입력해주세요"
+            defaultValue={email}
           />
         </div>
         <div className="flex flex-col gap-[5px]">
@@ -59,6 +57,7 @@ function Login() {
             onChange={handlePassword}
             type="password"
             placeholder="비밀번호를 입력해주세요"
+            defaultValue={password}
           />
         </div>
       </div>

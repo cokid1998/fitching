@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 import { Link } from "react-router-dom";
 import WhiteLogo from "@/assets/whiteLogo.png";
 import {
@@ -43,6 +44,7 @@ const positionTop = (scrollY) => {
 };
 
 function Video() {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const path = switchCategoryToKr(location.pathname.slice(7));
   const [curLargeCategory, setCurLargeCategory] = useState(path);
@@ -76,7 +78,11 @@ function Video() {
           />
         </Link>
         <p className="text-white mb-[46px]">
-          <span className="text-[20px]">이태관님을 위한</span>
+          <span className="text-[20px]">
+            {curLargeCategory} 스트레칭이 하고싶은
+          </span>
+          <br />
+          <span className="text-[20px]">{user.name}님을 위한</span>
           <br />
           <span className="text-[30px] font-semibold">추천 스트레칭</span>
         </p>
