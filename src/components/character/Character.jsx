@@ -10,23 +10,32 @@ import { AuthContext } from "@/context/AuthContext";
 import { useCookies } from "react-cookie";
 
 const setOpacity = (part, partState) => {
-  if (partState.lenght === 0) return 0.3;
-  for (let el of partState) {
-    if (el.partName === part) {
-      if (el.count < 1) {
-        return 0.3;
-      }
-      if (el.count < 3) {
-        return 0.6;
-      }
-      if (el.count < 6) {
-        return 0.9;
-      }
-      if (el.count > 10) {
-        return 1;
-      }
-    }
+  if (getPartNameCount(part, partState) < 1) {
+    return 0.3;
   }
+  if (getPartNameCount(part, partState) < 3) {
+    return 0.5;
+  }
+  if (getPartNameCount(part, partState) < 5) {
+    return 0.7;
+  }
+  if (getPartNameCount(part, partState) < 7) {
+    return 0.9;
+  }
+  if (getPartNameCount(part, partState) > 10) {
+    return 1;
+  }
+};
+
+const getPartNameCount = (part, partState) => {
+  if (partState.length === 0) return 0;
+
+  for (let i = 0; i < 4; i++) {
+    if (partState[i] === undefined) return;
+    if (part === partState[i].partName) return partState[i].count;
+    else return 0;
+  }
+  return 0;
 };
 
 function Character({ isLink = true }) {
@@ -44,6 +53,7 @@ function Character({ isLink = true }) {
     );
 
   useEffect(() => {
+    if (!user) return;
     try {
       const getPartsData = async () => {
         const res = await getParts(user.userId, cookie.accessToken);
@@ -56,7 +66,10 @@ function Character({ isLink = true }) {
     } finally {
       setIsLoading(false);
     }
-  }, [cookie.accessToken, user]);
+  }, [user]);
+
+  // console.log(partState);
+  // console.log(getPartNameCount("head", partState));
 
   if (isLogged && !isLoading) return null;
   return (

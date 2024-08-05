@@ -1,19 +1,79 @@
 import { Progress } from "@/components/ui/progress";
 import { LockKeyhole } from "lucide-react";
-import TierImage from "@/assets/platinum.png";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
+import { getUserInfo } from "@/api/getUserInfo";
+import { useCookies } from "react-cookie";
+import BronzeImage from "@/assets/tier/bronze.webp";
+import SilverImage from "@/assets/tier/silver.webp";
+import GoldImage from "@/assets/tier/gold.webp";
+import PlatinumImage from "@/assets/tier/platinum.webp";
+import DiamondImage from "@/assets/tier/diamond.webp";
+import GrandmasterImage from "@/assets/tier/grandmaster.webp";
+import ChallengerImage from "@/assets/tier/challenger.webp";
+
+const imageURL = (tier) => {
+  switch (tier) {
+    case "Bronze" || null:
+      return BronzeImage;
+    case null:
+      return BronzeImage;
+    case "Sliver":
+      return SilverImage;
+    case "Gold":
+      return GoldImage;
+    case "Platinum":
+      return PlatinumImage;
+    case "Diamond":
+      return DiamondImage;
+    case "Grand Master":
+      return GrandmasterImage;
+    case "Challenger":
+      return ChallengerImage;
+    default:
+      break;
+  }
+};
 
 function Tier() {
-  const { isLogged } = useContext(AuthContext);
+  const { isLogged, user } = useContext(AuthContext);
+  const [cookie] = useCookies(["accessToken"]);
+  const [point, setPoint] = useState(0);
+  const [tier, setTier] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const fetch = async () => {
+      try {
+        const res = await getUserInfo(user.userId, cookie.accessToken);
+        console.log(res.data);
+
+        setPoint(res.data.currentPoints);
+        setTier(res.data.tiar);
+        setIsLoading(true);
+      } catch (e) {
+        alert(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetch();
+  }, [user]);
+
+  if (isLoading) null;
+
   return (
     <div className="w-full flex flex-col items-center mb-[32px]">
       <Progress value={33} className="w-[60%] mb-[30px]" />
       {isLogged ? (
         <div className="w-[200px] h-[60px] border-black border-2 flex justify-around items-center rounded-2xl">
-          <img src={TierImage} className="w-[50px] h-[40px]" />
-          <span className="text-xl font-bold">점수</span>
+          <img src={imageURL(tier)} className="w-[50px] h-[40px]" />
+          <span className="text-xl font-bold">
+            {isLogged ? `${point}점` : "점수"}
+          </span>
         </div>
       ) : (
         <Link
