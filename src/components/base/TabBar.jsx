@@ -15,7 +15,6 @@ function TabBar() {
 
   return (
     <>
-      <button onClick={logout}>logOut</button>
       <Sheet>
         <SheetContent className="w-[300px] sm:w-[540px] flex flex-col items-center justify-center">
           <Tier />

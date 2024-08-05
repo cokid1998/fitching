@@ -68,9 +68,6 @@ function Character({ isLink = true }) {
     }
   }, [user]);
 
-  // console.log(partState);
-  // console.log(getPartNameCount("head", partState));
-
   if (isLogged && !isLoading) return null;
   return (
     <>

@@ -49,7 +49,6 @@ function Tier() {
     const fetch = async () => {
       try {
         const res = await getUserInfo(user.userId, cookie.accessToken);
-        console.log(res.data);
 
         setPoint(res.data.currentPoints);
         setTier(res.data.tiar);
