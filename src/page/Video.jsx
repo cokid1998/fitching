@@ -55,7 +55,7 @@ function Video() {
   );
   const handleLargeCategory = (value) => {
     setCurLargeCategory(value);
-    setSelectSmallCategory(smallCategory[curLargeCategory][0]);
+    setSelectSmallCategory(smallCategory[value][0]);
   };
   const handleSelectSmallCategory = (value) => {
     setSelectSmallCategory(value);
@@ -106,7 +106,9 @@ function Video() {
 
           <Select onValueChange={handleSelectSmallCategory}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder={smallCategory[curLargeCategory][0]} />
+              <SelectValue placeholder={smallCategory[curLargeCategory][0]}>
+                {/* {} */}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {smallCategory[curLargeCategory]?.map((item) => (
