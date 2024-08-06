@@ -71,12 +71,12 @@ function Login() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center">
+      {/* <div className="flex flex-col items-center">
         <div className="mb-[25px]">Google 계정으로 간편 가입하기</div>
         <button>
           <img src={GoogleLogin} />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
