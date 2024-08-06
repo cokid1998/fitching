@@ -36,11 +36,37 @@ const imageURL = (tier) => {
   }
 };
 
+const progressValue = (level, point) => {
+  const viewedCount = point / 10;
+  console.log(viewedCount);
+
+  if (level === 0) {
+    // 포인트가 5개가 되면 레벨업
+    return viewedCount * 10;
+  } else if (level === 1) {
+    // 포인트가 8개가 되면 레벨업
+    return viewedCount * 10;
+  } else if (level === 2) {
+    // 포인트가 10개가 되면 레벨업
+    return viewedCount * 10;
+  } else if (level === 3) {
+    // 포인트가 15개가 되면 레벨업
+    return viewedCount * 10;
+  } else if (level === 4) {
+    // 포인트가 25가 되면 레벨업
+    return viewedCount * 10;
+  } else if (level === 5) {
+    //포인트가 50가 되면 레벨업
+    return viewedCount * 10;
+  }
+};
+
 function Tier() {
   const { isLogged, user } = useContext(AuthContext);
   const [cookie] = useCookies(["accessToken"]);
   const [point, setPoint] = useState(0);
   const [tier, setTier] = useState("");
+  const [level, setLevel] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -52,7 +78,9 @@ function Tier() {
 
         setPoint(res.data.currentPoints);
         setTier(res.data.tiar);
+        setLevel(res.data.level);
         setIsLoading(true);
+        console.log(res.data);
       } catch (e) {
         alert(e);
       } finally {
@@ -66,7 +94,10 @@ function Tier() {
 
   return (
     <div className="w-full flex flex-col items-center mb-[32px]">
-      <Progress value={33} className="w-[60%] mb-[30px]" />
+      <Progress
+        value={progressValue(level, point)}
+        className="w-[60%] mb-[30px]"
+      />
       {isLogged ? (
         <div className="w-[200px] h-[60px] border-black border-2 flex justify-around items-center rounded-2xl">
           <img src={imageURL(tier)} className="w-[50px] h-[40px]" />
