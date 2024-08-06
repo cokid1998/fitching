@@ -39,7 +39,7 @@ function TabBar() {
               <div className="text-white">Home</div>
             </div>
           </Link>
-          {isLogged ? (
+          {/* {isLogged ? (
             <SheetTrigger className="bg-black w-[120px] h-[50px] pl-[10px] gap-[5px] rounded-full flex items-center">
               <div className="bg-white w-[34px] h-[34px] rounded-full flex justify-center items-center">
                 <User />
@@ -64,7 +64,7 @@ function TabBar() {
               </motion.div>
               <div className="text-white">Login</div>
             </Link>
-          )}
+          )} */}
         </div>
       </Sheet>
     </>

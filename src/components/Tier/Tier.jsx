@@ -94,7 +94,7 @@ function Tier() {
 
   return (
     <div className="w-full flex flex-col items-center mb-[32px]">
-      <Progress
+      {/* <Progress
         value={progressValue(level, point)}
         className="w-[60%] mb-[30px]"
       />
@@ -113,7 +113,7 @@ function Tier() {
           <div className="text-[#B8B8B8]">로그인 후 점수 잠금 해제</div>
           <LockKeyhole color="#B8B8B8" />
         </Link>
-      )}
+      )} */}
     </div>
   );
 }
