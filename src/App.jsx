@@ -9,6 +9,7 @@ import Signup from "@/page/Signup";
 import { Helmet } from "react-helmet-async";
 
 function App() {
+  console.log("asdf");
   return (
     <Layout>
       <Helmet>
