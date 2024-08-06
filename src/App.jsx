@@ -6,12 +6,14 @@ import Video from "@/page/Video";
 import VideoDetail from "@/page/VideoDetail";
 import Login from "@/page/Login";
 import Signup from "@/page/Signup";
-import { useContext } from "react";
-import { AuthContext, AuthProvider } from "@/context/AuthContext";
+import { Helmet } from "react-helmet-async";
 
 function App() {
   return (
     <Layout>
+      <Helmet>
+        <title>Fitching</title>
+      </Helmet>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
