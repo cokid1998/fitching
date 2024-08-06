@@ -121,7 +121,7 @@ function Video() {
 
       <div
         ref={scrollRef}
-        className={`px-[30px] flex flex-col gap-[30px] overflow-scroll border border-cyan-500 scrollbar-hide
+        className={`px-[30px] flex flex-col gap-[30px] overflow-scroll border scrollbar-hide
           ${scrollY === 0 ? "h-100svh-minus-300" : ""}
           `}
         style={
