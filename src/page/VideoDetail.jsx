@@ -133,7 +133,7 @@ function VideoDetail() {
         <YouTube videoId={youtubeId} opts={opts} onReady={onReady} />
       </div>
 
-      {isLogged ? (
+      {/* {isLogged ? (
         <button
           className="w-fit flex flex-col items-center justify-center gap-[20px]"
           onClick={submitChecked}
@@ -176,7 +176,7 @@ function VideoDetail() {
             <br /> 버튼을 클릭해 보세요!
           </motion.div>
         </button>
-      )}
+      )} */}
     </div>
   );
 }
